@@ -1,13 +1,14 @@
 #MASTERMIND GAME
+import getpass
 
 def player2_guess():
     return int(input("\nPlayer-2 Guess the number: "))
 
 def player2_set():
-    return int(input("Player-2 Set Your Multi Digit Number: "))
+    return getpass.getpass("Player-2 Set Your Multi Digit Number: ")
 
 def player1_set():
-    return int(input("Player-1 Enter Your Multi Digit Number: "))
+    return getpass.getpass("Player-1 Enter Your Multi Digit Number: ")
 
 def player1_guess():
     return int(input("\nPlayer-1 Guess the number: "))
@@ -39,33 +40,37 @@ count1 = 0
 count2 = 0
 correct = True
 
-print("*****************************************************\n*                                                   *\n*           Welcome To MasterMind Game              *\n*                                                   *\n*****************************************************")
+print("*****************************************************")
+print("*                                                   *")
+print("*           Welcome To MasterMind Game              *")
+print("*                                                   *")
+print("*****************************************************")
 
 while correct:
     count2 += 1
     if count2 == 1:
         p1set = player1_set()
         p2guess = player2_guess()
-        if p2guess == p1set:
+        if p2guess == int(p1set):
             print("Player 2, you're a Master Mind!!")
             correct = False
         else:
             print(f"You lost round {count2}")
             hint = Hint2(p1set, p2guess)
-            print("Hint:\nYour Matching Digits are: ",hint)
+            print("Hint:\nYour Matching Digits are:", hint)
     else:
         p2guess = player2_guess()
-        if p2guess == p1set:
+        if p2guess == int(p1set):
             print(f"You have successfully guessed the number in round {count2}.\n")
             p2set = player2_set()
             for i in range(count2):
                 p1guess = player1_guess()
                 count1 += 1
-                if p1guess == p2set and count1 < count2:
+                if p1guess == int(p2set) and count1 < count2:
                     print("Player 1, you won the game and you're the Master Mind!!")
                     correct = False
                     break
-                elif p1guess != p2set:
+                elif p1guess != int(p2set):
                     print(f"You lost round {count1}")
                     hint = Hint1(p2set, p1guess)
                     print("Hint:\nYour Matching Digits are:", hint)
